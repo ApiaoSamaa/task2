@@ -56,10 +56,10 @@ def main():
                                        embed_dim=emb_dim,
                                        decoder_dim=decoder_dim,
                                        vocab_size=len(word_map),
-                                       dropout=dropout)
+                                       dropout=dropout).to(device)
         decoder_optimizer = torch.optim.Adam(params=filter(lambda p: p.requires_grad, decoder.parameters()),
                                              lr=decoder_lr)
-        encoder = Encoder()
+        encoder = Encoder().to(device)
         encoder.fine_tune(fine_tune_encoder)
         encoder_optimizer = torch.optim.Adam(params=filter(lambda p: p.requires_grad, encoder.parameters()),
                                              lr=encoder_lr) if fine_tune_encoder else None
@@ -90,10 +90,10 @@ def main():
                                      std=[0.229, 0.224, 0.225])
     train_loader = torch.utils.data.DataLoader(
         CaptionDataset(data_folder, split='train', data_name=data_name + '_'+ str(cap_per_img) + '_cap_per_img_'+str(min_word_freq) + '_min_word_freq', transform=transforms.Compose([normalize])),
-        batch_size=batch_size, shuffle=True, num_workers=workers, pin_memory=True)
+        batch_size=batch_size, shuffle=True, num_workers=workers, pin_memory=True).to(device)
     val_loader = torch.utils.data.DataLoader(
         CaptionDataset(data_folder, split='val',data_name=data_name + '_'+ str(cap_per_img) + '_cap_per_img_'+str(min_word_freq) + '_min_word_freq',transform=transforms.Compose([normalize])),
-        batch_size=batch_size, shuffle=True, num_workers=workers, pin_memory=True)
+        batch_size=batch_size, shuffle=True, num_workers=workers, pin_memory=True).to(device)
 
     # Epochs
     for epoch in range(start_epoch, epochs):
