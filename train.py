@@ -90,10 +90,10 @@ def main():
                                      std=[0.229, 0.224, 0.225])
     train_loader = torch.utils.data.DataLoader(
         CaptionDataset(data_folder, split='train', data_name=data_name + '_'+ str(cap_per_img) + '_cap_per_img_'+str(min_word_freq) + '_min_word_freq', transform=transforms.Compose([normalize])),
-        batch_size=batch_size, shuffle=True, num_workers=workers, pin_memory=True).to(device)
+        batch_size=batch_size, shuffle=True, num_workers=workers, pin_memory=True)
     val_loader = torch.utils.data.DataLoader(
         CaptionDataset(data_folder, split='val',data_name=data_name + '_'+ str(cap_per_img) + '_cap_per_img_'+str(min_word_freq) + '_min_word_freq',transform=transforms.Compose([normalize])),
-        batch_size=batch_size, shuffle=True, num_workers=workers, pin_memory=True).to(device)
+        batch_size=batch_size, shuffle=True, num_workers=workers, pin_memory=True)
 
     # Epochs
     for epoch in range(start_epoch, epochs):
