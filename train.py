@@ -164,8 +164,8 @@ def train(train_loader, encoder, decoder, criterion, encoder_optimizer, decoder_
 
         # Move to GPU, if available
         imgs = imgs.to(device)
-        caps = torch.tensor(caps, dtype=torch.float32)
-        caplens = torch.tensor(caplens, dtype=torch.float32)
+        caps = torch.tensor(caps, dtype=torch.float32).to(device)
+        caplens = torch.tensor(caplens, dtype=torch.float32).to(device)
 
         # Forward prop.
         imgs = encoder(imgs)
