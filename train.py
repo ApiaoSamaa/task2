@@ -27,7 +27,7 @@ start_epoch = 0
 epochs = 120  # number of epochs to train for (if early stopping is not triggered)
 epochs_since_improvement = 0  # keeps track of number of epochs since there's been an improvement in validation BLEU
 batch_size = 1
-workers = 0  # for data-loading; right now, only 1 works with h5py
+workers = 4  # for data-loading; right now, only 1 works with h5py
 encoder_lr = 1e-4  # learning rate for encoder if fine-tuning
 decoder_lr = 4e-4  # learning rate for decoder
 grad_clip = 5.  # clip gradients at an absolute value of
@@ -143,7 +143,7 @@ def train(train_loader, encoder, decoder, criterion, encoder_optimizer, decoder_
     :param encoder: encoder model
     :param decoder: decoder model
     :param criterion: loss layer
-    :param encoder_optimizer: optimizer to update encoder's weights (if fine-tuning)
+    :param encoder_optimizer: optimizer to update encoder's weights (if fine-tunxing)
     :param decoder_optimizer: optimizer to update decoder's weights
     :param epoch: epoch number
     """
